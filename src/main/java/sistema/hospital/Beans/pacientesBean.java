@@ -111,6 +111,8 @@ public class pacientesBean implements Serializable {
         pacientesBean addPaciente = new pacientesBean();
         pacienteDao registerPaciente = new pacienteDao();
         addPaciente.setNome(nome);
+        String cpfs = cpf;
+        
         addPaciente.setCpf(cpf);
         addPaciente.setEspecialista(especialista);
         addPaciente.setPrioridade(prioridade);
@@ -118,7 +120,7 @@ public class pacientesBean implements Serializable {
         switch (codeState) {
             
             case 200:
-                    FacesMessage Sucesso = new FacesMessage(FacesMessage.SEVERITY_INFO, "Paciente: " +nome+ " Foi adicionado com sucesso.", null);
+                    FacesMessage Sucesso = new FacesMessage(FacesMessage.SEVERITY_INFO, "Paciente: " +nome+ " foi adicionado com sucesso.", null);
                     FacesContext.getCurrentInstance().addMessage(null, Sucesso);
                 break;
                 

@@ -25,6 +25,10 @@
                 <f:facet name="header">Especialista</f:facet>
                 <h:outputText value="#{paciente.especialista.especialista}" />
             </p:column>
+            <p:column headerText="Prioridade" class="head" >
+                <f:facet name="header">Prioridade</f:facet>
+                <h:outputText value="#{paciente.getprioridade().prioridade}" />
+            </p:column>
         </p:dataTable>
     </h:body>
 </html>

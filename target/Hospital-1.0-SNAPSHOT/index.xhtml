@@ -28,51 +28,51 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
             <h1 class="h1">Gerenciamento de chamadas</h1>
         </header>
         <main>
-            <p:messages id="msg" autoUpdate="true" closable="true" style="width: 460px"/>
+            <p:messages id="msg" autoUpdate="true" closable="true" style="width: 100%"/>
             <section class="cadastrarPaciente">
-                <h:form>
+                <h:form >
                     <label>Nome completo *</label>
                     <h:inputText class="form-control" id="fullName"  value="#{pacientesBeans.nome}"/>
                     <label>Cpf *</label>
                     <h:inputText class="form-control " id="cpf" value="#{pacientesBeans.cpf}" />
                     <label>Especialista</label>
-                    <h:selectOneMenu class="form-select form-select-lg mb-3"  value="#{pacientesBeans.especialista.especialista}" valueChangeListener="#{especialistaBean.viwerName}">
+                    <h:selectOneMenu class="form-select form-select-lg mb-3"  value="#{pacientesBeans.especialista.especialista}" valueChangeListener="#{pacientesBeans.viwerName}">
                         <f:selectItem itemValue="" itemLabel="Selecione o especialista"   />
-                        <f:selectItem itemValue="1" itemLabel="Cardiologista" />
-                        <f:selectItem itemValue="2" itemLabel="Pediatra" />
-                        <f:selectItem itemValue="3" itemLabel="Ortopedista" />
-                        <f:selectItem itemValue="4" itemLabel="Ginecologista" />
-                        <f:selectItem itemValue="5" itemLabel="Neurologista" />
-                        <f:selectItem itemValue="6" itemLabel="Dermatologista" />
-                        <f:selectItem itemValue="7" itemLabel="Oncologista" />
-                        <f:selectItem itemValue="8" itemLabel="Endocrinologista" />
-                        <f:selectItem itemValue="9" itemLabel="Psiquiatra" />
-                        <f:selectItem itemValue="10" itemLabel="Oftalmologista" />
-                        <f:selectItem itemValue="11" itemLabel="Urologista" />
-                        <f:selectItem itemValue="12" itemLabel="Otorrinolaringologista" />
-                        <f:selectItem itemValue="13" itemLabel="Reumatologista" />
-                        <f:selectItem itemValue="14" itemLabel="Nefrologista" />
-                        <f:selectItem itemValue="15" itemLabel="Hematologista" />
-                        <f:selectItem itemValue="16" itemLabel="Infectologista" />
-                        <f:selectItem itemValue="17" itemLabel="Pneumologista" />
-                        <f:selectItem itemValue="18" itemLabel="Gastroenterologista" />
-                        <f:selectItem itemValue="19" itemLabel="Cirurgião Geral" />
-                        <f:selectItem itemValue="20" itemLabel="Radiologista" />
+                        <f:selectItem itemValue="Cardiologista" itemLabel="Cardiologista" />
+                        <f:selectItem itemValue="Pediatra" itemLabel="Pediatra" />
+                        <f:selectItem itemValue="Ortopedista" itemLabel="Ortopedista" />
+                        <f:selectItem itemValue="Ginecologista" itemLabel="Ginecologista" />
+                        <f:selectItem itemValue="Neurologista" itemLabel="Neurologista" />
+                        <f:selectItem itemValue="Dermatologista" itemLabel="Dermatologista" />
+                        <f:selectItem itemValue="Oncologista" itemLabel="Oncologista" />
+                        <f:selectItem itemValue="Endocrinologista" itemLabel="Endocrinologista" />
+                        <f:selectItem itemValue="Psiquiatra" itemLabel="Psiquiatra" />
+                        <f:selectItem itemValue="Oftalmologista" itemLabel="Oftalmologista" />
+                        <f:selectItem itemValue="Urologista" itemLabel="Urologista" />
+                        <f:selectItem itemValue="Otorrinolaringologista" itemLabel="Otorrinolaringologista" />
+                        <f:selectItem itemValue="Reumatologista" itemLabel="Reumatologista" />
+                        <f:selectItem itemValue="Nefrologista" itemLabel="Nefrologista" />
+                        <f:selectItem itemValue="Hematologista" itemLabel="Hematologista" />
+                        <f:selectItem itemValue="Infectologista" itemLabel="Infectologista" />
+                        <f:selectItem itemValue="Pneumologista" itemLabel="Pneumologista" />
+                        <f:selectItem itemValue="Gastroenterologista" itemLabel="Gastroenterologista" />
+                        <f:selectItem itemValue="Cirurgião Geral" itemLabel="Cirurgião Geral" />
+                        <f:selectItem itemValue="Radiologista" itemLabel="Radiologista" />
                     </h:selectOneMenu>
 
                     <label>
                         Prioridade
                     </label>
-                    <h:selectOneMenu class="form-select form-select-lg mb-3" value="#{pacientesBeans.prioridade.prioridade}">
+                    <h:selectOneMenu class="form-select form-select-lg mb-3" value="#{pacientesBeans.prioridade.prioridade}" valueChangeListener="#{pacientesBeans.viwerPriority}">
                         <f:selectItem itemValue="" class="alert alert-primary" itemLabel="Seleciona a prioridade"/>
-                        <f:selectItem itemValue="1" itemLabel="Vermelho" />
-                        <f:selectItem itemValue="2" itemLabel="Laranja" />
-                        <f:selectItem itemValue="3" itemLabel="Branco" />
+                        <f:selectItem itemValue="Vermelho" itemLabel="Vermelho" />
+                        <f:selectItem itemValue="Laranja" itemLabel="Laranja" />
+                        <f:selectItem itemValue="Branco" itemLabel="Branco" />
 
                     </h:selectOneMenu>
                     <div class="d-grid gap-2">
 
-                        <p:commandButton class="btn btn-lg btn-secondary" value="Adicionar paciente" action="#{pacientesBeans.registerPaciente()}" update="msg"/>
+                        <p:commandButton type="submit" class="btn btn-lg btn-secondary" value="Adicionar paciente" action="#{pacientesBeans.registerPaciente()}" update="msg"/>
                     </div>
                 </h:form>
             </section>
