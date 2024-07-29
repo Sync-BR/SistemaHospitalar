@@ -9,7 +9,6 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ValueChangeEvent;
-import static sistema.hospital.Beans.especialidadeBean.especialistas;
 
 import sistema.hospital.Dao.ListaDao;
 import sistema.hospital.Dao.pacienteDao;
@@ -31,47 +30,25 @@ public class pacientesBean implements Serializable {
     private prioridadeBean prioridade;
     ListaDao listaDao = new ListaDao();
 
+    /**
+     *
+     * @init Carregar os arquivos de inicialização.
+     */
     @PostConstruct
     public void init() {
         try {
-            obterLista();
+
+            getPacientes(); //Carregar a lista da tabela de pacientes listaPacientes.xhtml.
         } catch (Exception e) {
-            e.printStackTrace();
+            e.getMessage();
         }
     }
 
-    public ArrayList<pacientesBean> obterLista() throws Exception {
-        pacientesBean.pacientes = listaDao.listPatients();
-
-        return pacientes;
-
-    }
-
-    public static void main(String[] args) throws Exception {
-        pacientesBean te = new pacientesBean();
-        List<pacientesBean> addpacientes = te.obterLista();
-        for (pacientesBean paci : addpacientes) {
-            System.out.println(paci.nome);
-        }
-        /*
-        especialidadeBean especialista = new especialidadeBean();
-        especialista.setEspecialista("teste");
-        pacientesBean pacientesBean = new pacientesBean();
-        pacientesBean.setEspecialista(especialista);
-        System.out.println("Especialista: " + pacientesBean.getEspecialista().getEspecialista());
-         */
-        ListaDao lista = new ListaDao();
-        // pacientes = lista.listPatients();
-
-        for (pacientesBean addPacientes : pacientes) {
-            System.out.println("Nome: " + addPacientes.getNome());
-            System.out.println("CPF:" + addPacientes.getCpf());
-            System.out.println("Especialista:" + addPacientes.getEspecialista().getEspecialista());
-            // System.out.println("Especialista: " + addPacientes.especialista.getEspecialista());
-        }
-
-    }
-
+    /**
+     *
+     * @pacientesBean inicializar as classes das instancias
+     *
+     */
     public pacientesBean() {
         this.especialista = new especialidadeBean();
         this.prioridade = new prioridadeBean();
@@ -79,6 +56,16 @@ public class pacientesBean implements Serializable {
 
     }
 
+    /**
+     *
+     * @param id Recebe o valor do id
+     * @param nome recebe o valor do nome
+     * @param cpf recebe o valor do cpf
+     * @param prioridade Recebe o valor da prioridade.
+     * @param especialista Recebe o valor da especialidade
+     * @pacientesBean Construtor
+     *
+     */
     public pacientesBean(int id, String nome, String cpf, String prioridade, String especialista) {
         this.especialista = new especialidadeBean();
         this.prioridade = new prioridadeBean();
@@ -89,31 +76,37 @@ public class pacientesBean implements Serializable {
         this.especialista.especialista = especialista;
     }
 
-    public pacientesBean(especialidadeBean especialista) {
-
-        this.especialista = especialista;
-    }
-
-    public void listar() throws Exception {
-        //     pacientes = listaDao.listPatients();
-        //  pacientes = listaDao.listPatients();
-        pacientesBean add = new pacientesBean();
-        for (pacientesBean listarPacientes : pacientes) {
-            pacientes.add(listarPacientes);
-            //  System.out.println("Nome: " +listarPacientes.getNome() );
-
-        }
-        for (int index = 0; index < pacientes.size(); index++) {
-            System.out.println(pacientes.get(index));
-        }
-
-    }
-    public String nomeSelecionado;
+    /**
+     *
+     * @viwerName Funcionalidade para pegar o valor do especialista
+     * <h:selectOneMenu valueChangeListener="#{pacientesBeans.viwerName}">
+     * @param event Recebe o nome
+     */
     public void viwerName(ValueChangeEvent event) {
-        
-        String nome = (String) event.getNewValue();
-        this.especialista.especialista = nome;
+        String Nome = (String) event.getNewValue();
+        this.especialista.especialista = Nome;
+
     }
+
+    /**
+     *
+     * @viwerPriority Funcionalidade para pegar o valor da prioridade
+     * <h:selectOneMenu  valueChangeListener="#{pacientesBeans.viwerPriority}">
+     * @param event Recebe o nome da prioridade
+     */
+    public void viwerPriority(ValueChangeEvent event) {
+        String value = (String) event.getNewValue();
+        this.prioridade.Prioridade = value;
+    }
+
+
+    /**
+     *
+     * @return Retornar mensagem de Sucesso/Erro
+     * @throws java.lang.Exception
+     * @registerPaciente Funcionalidade para registrar um paciente no banco de dados
+     * 
+     */
     public String registerPaciente() throws Exception {
         pacientesBean addPaciente = new pacientesBean();
         pacienteDao registerPaciente = new pacienteDao();
@@ -121,18 +114,23 @@ public class pacientesBean implements Serializable {
         addPaciente.setCpf(cpf);
         addPaciente.setEspecialista(especialista);
         addPaciente.setPrioridade(prioridade);
-        boolean stateRegistred = registerPaciente.registerPatient(addPaciente);
-        if (stateRegistred) {
-            FacesMessage mensagem = new FacesMessage(FacesMessage.SEVERITY_INFO, "Adicionado com sucesso", null);
-            FacesContext.getCurrentInstance().addMessage(null, mensagem);
-            return null;
-
-        } else {
-            FacesMessage mensagem = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Falhou ao adicionar paciente", null);
-            FacesContext.getCurrentInstance().addMessage(null, mensagem);
-            return null;
+        int codeState = registerPaciente.registerPatient(addPaciente);
+        switch (codeState) {
+            
+            case 200:
+                    FacesMessage Sucesso = new FacesMessage(FacesMessage.SEVERITY_INFO, "Paciente: " +nome+ " Foi adicionado com sucesso.", null);
+                    FacesContext.getCurrentInstance().addMessage(null, Sucesso);
+                break;
+                
+            case 0:
+                FacesMessage  Erro = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro de conexão", null);
+                FacesContext.getCurrentInstance().addMessage(null, Erro);
+                break;
+            default:
+                throw new AssertionError();
         }
-
+ 
+        return null;
     }
 
     public int getId() {
@@ -176,9 +174,7 @@ public class pacientesBean implements Serializable {
     }
 
     public ArrayList<pacientesBean> getPacientes() throws Exception {
-
         pacientes = listaDao.listPatients();
-
         return pacientes;
     }
 
