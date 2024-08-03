@@ -7,28 +7,38 @@
         <title>Lista pacientes</title>
     </h:head>
     <h:body>
-        <p:dataTable id="tabelaPacientes" value="#{pacientesBeans.pacientes}" var="paciente" rowKey="#{paciente.id}" selectionMode="single" >
-            <p:column headerText="Id" class="head">
-                <f:facet name="header">Id</f:facet>
-                <h:outputText value="#{paciente.id}" />
-            </p:column>
-            <p:column headerText="Nome" class="head">
-                <f:facet name="header">Nome:</f:facet>
-                <h:outputText value="#{paciente.nome}" />
-            </p:column>
-            <p:column headerText="Cpf" class="head">
-                <f:facet name="header">CPF</f:facet>
-                <h:outputText value="#{paciente.cpf}" />
-            </p:column>
 
-            <p:column headerText="Especialista" class="head" >
-                <f:facet name="header">Especialista</f:facet>
-                <h:outputText value="#{paciente.especialista.especialista}" />
-            </p:column>
-            <p:column headerText="Prioridade" class="head" >
-                <f:facet name="header">Prioridade</f:facet>
-                <h:outputText value="#{paciente.getprioridade().prioridade}" />
-            </p:column>
-        </p:dataTable>
+         <h:form id="form">
+            <p:dataTable  id="tabelaPacientes" value="#{pacientesBeans.pacientes}" var="paciente" rowKey="#{paciente.id}" selectionMode="single"  >
+                <p:column headerText="Id" class="head">
+                    <f:facet name="header">Id</f:facet>
+                    <h:outputText value="#{paciente.id}" />
+                </p:column>
+                <p:column headerText="Nome" class="head">
+                    <f:facet name="header">Nome:</f:facet>
+                    <h:outputText value="#{paciente.nome}" />
+                </p:column>
+                <p:column headerText="Cpf" class="head">
+                    <f:facet name="header">CPF</f:facet>
+                    <h:outputText value="#{paciente.cpf}" />
+                </p:column>
+
+                <p:column headerText="Especialista" class="head" >
+                    <f:facet name="header">Especialista</f:facet>
+                    <h:outputText value="#{paciente.especialista.especialista}" />
+                </p:column>
+                <p:column headerText="Prioridade" class="head" >
+                    <f:facet name="header">Prioridade</f:facet>
+                    <h:outputText value="#{paciente.getprioridade().prioridade}" />
+                </p:column>
+            </p:dataTable>
+        
+       
+            <p:commandButton   type="submit" value="Chamar Prioridade"  action="#{pacientesBeans.deletePaciente}" update="form"/>
+        </h:form>
+
+
+
+
     </h:body>
 </html>

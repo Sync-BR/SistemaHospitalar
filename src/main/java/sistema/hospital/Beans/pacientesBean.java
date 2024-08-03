@@ -9,7 +9,6 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ValueChangeEvent;
-
 import sistema.hospital.Dao.ListaDao;
 import sistema.hospital.Dao.pacienteDao;
 
@@ -22,13 +21,14 @@ import sistema.hospital.Dao.pacienteDao;
 public class pacientesBean implements Serializable {
 
     private static final long serialVersionUID = 1L;
+
     private static ArrayList<pacientesBean> pacientes = new ArrayList<>();
     private int id;
     private String nome;
     private String cpf;
     private especialidadeBean especialista;
     private prioridadeBean prioridade;
-    ListaDao listaDao = new ListaDao();
+    private static ListaDao listaDao = new ListaDao();
 
     /**
      *
@@ -37,8 +37,8 @@ public class pacientesBean implements Serializable {
     @PostConstruct
     public void init() {
         try {
-
-            getPacientes(); //Carregar a lista da tabela de pacientes listaPacientes.xhtml.
+            //Carregar a lista da tabela de pacientes listaPacientes.xhtml.
+         //   getPacientes();
         } catch (Exception e) {
             e.getMessage();
         }
@@ -76,10 +76,18 @@ public class pacientesBean implements Serializable {
         this.especialista.especialista = especialista;
     }
 
+    public pacientesBean(String prioridade, String especialista) {
+        this.especialista = new especialidadeBean();
+        this.prioridade = new prioridadeBean();
+        this.prioridade.Prioridade = prioridade;
+        this.especialista.especialista = especialista;
+    }
+
     /**
      *
-     * @viwerName Funcionalidade para pegar o valor do especialista
+     * Funcionalidade para pegar o valor do especialista
      * <h:selectOneMenu valueChangeListener="#{pacientesBeans.viwerName}">
+     *
      * @param event Recebe o nome
      */
     public void viwerName(ValueChangeEvent event) {
@@ -98,40 +106,44 @@ public class pacientesBean implements Serializable {
         String value = (String) event.getNewValue();
         this.prioridade.Prioridade = value;
     }
-
+    
+    
+    public void deletePaciente() throws Exception{
+        listaDao.chamar();
+    
+    }
 
     /**
      *
      * @return Retornar mensagem de Sucesso/Erro
      * @throws java.lang.Exception
-     * @registerPaciente Funcionalidade para registrar um paciente no banco de dados
-     * 
+     * @registerPaciente Funcionalidade para registrar um paciente no banco de
+     * dados
+     *
      */
     public String registerPaciente() throws Exception {
         pacientesBean addPaciente = new pacientesBean();
         pacienteDao registerPaciente = new pacienteDao();
         addPaciente.setNome(nome);
-        String cpfs = cpf;
-        
         addPaciente.setCpf(cpf);
         addPaciente.setEspecialista(especialista);
         addPaciente.setPrioridade(prioridade);
         int codeState = registerPaciente.registerPatient(addPaciente);
         switch (codeState) {
-            
+
             case 200:
-                    FacesMessage Sucesso = new FacesMessage(FacesMessage.SEVERITY_INFO, "Paciente: " +nome+ " foi adicionado com sucesso.", null);
-                    FacesContext.getCurrentInstance().addMessage(null, Sucesso);
+                FacesMessage Sucesso = new FacesMessage(FacesMessage.SEVERITY_INFO, "Paciente: " + nome + " foi adicionado com sucesso.", null);
+                FacesContext.getCurrentInstance().addMessage(null, Sucesso);
                 break;
-                
+
             case 0:
-                FacesMessage  Erro = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro de conexão", null);
+                FacesMessage Erro = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro de conexão", null);
                 FacesContext.getCurrentInstance().addMessage(null, Erro);
                 break;
             default:
                 throw new AssertionError();
         }
- 
+
         return null;
     }
 
@@ -176,7 +188,7 @@ public class pacientesBean implements Serializable {
     }
 
     public ArrayList<pacientesBean> getPacientes() throws Exception {
-        pacientes = listaDao.listPatients();
+        pacientes = listaDao.loadList();
         return pacientes;
     }
 

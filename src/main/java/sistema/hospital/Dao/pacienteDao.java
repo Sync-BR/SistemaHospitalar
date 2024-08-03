@@ -3,7 +3,6 @@ package sistema.hospital.Dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import sistema.hospital.Beans.especialidadeBean;
 import sistema.hospital.Beans.pacientesBean;
 import sistema.hospital.util.conexaoUtil;
 

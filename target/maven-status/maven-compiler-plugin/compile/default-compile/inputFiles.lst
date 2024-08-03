@@ -1,7 +1,8 @@
 E:\Projetos\Hospital\src\main\java\sistema\hospital\util\conexaoUtil.java
 E:\Projetos\Hospital\src\main\java\sistema\hospital\Beans\pacientesBean.java
 E:\Projetos\Hospital\src\main\java\sistema\hospital\Beans\prioridadeBean.java
-E:\Projetos\Hospital\src\main\java\sistema\hospital\Beans\listaBeans.java
 E:\Projetos\Hospital\src\main\java\sistema\hospital\Dao\ListaDao.java
 E:\Projetos\Hospital\src\main\java\sistema\hospital\Beans\especialidadeBean.java
+E:\Projetos\Hospital\src\main\java\sistema\hospital\Beans\filaBean.java
 E:\Projetos\Hospital\src\main\java\sistema\hospital\Dao\pacienteDao.java
+E:\Projetos\Hospital\src\main\java\sistema\hospital\init\init.java
