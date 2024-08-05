@@ -2,7 +2,7 @@ sistema\hospital\Beans\pacientesBean.class
 sistema\hospital\Beans\especialidadeBean.class
 sistema\hospital\Beans\filaBean.class
 sistema\hospital\Beans\prioridadeBean.class
+sistema\hospital\Dao\filaBeans.class
 sistema\hospital\Dao\pacienteDao.class
 sistema\hospital\init\init.class
-sistema\hospital\Dao\ListaDao.class
 sistema\hospital\util\conexaoUtil.class

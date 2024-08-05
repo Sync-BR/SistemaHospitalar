@@ -9,7 +9,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ValueChangeEvent;
-import sistema.hospital.Dao.ListaDao;
+import sistema.hospital.Dao.filaBeans;
 import sistema.hospital.Dao.pacienteDao;
 
 /**
@@ -28,7 +28,7 @@ public class pacientesBean implements Serializable {
     private String cpf;
     private especialidadeBean especialista;
     private prioridadeBean prioridade;
-    private static ListaDao listaDao = new ListaDao();
+ //  private static ListaDao listaDao = new ListaDao();
 
     /**
      *
@@ -37,8 +37,7 @@ public class pacientesBean implements Serializable {
     @PostConstruct
     public void init() {
         try {
-            //Carregar a lista da tabela de pacientes listaPacientes.xhtml.
-         //   getPacientes();
+           this.pacientes = filaBeans.loadList();
         } catch (Exception e) {
             e.getMessage();
         }
@@ -109,7 +108,7 @@ public class pacientesBean implements Serializable {
     
     
     public void deletePaciente() throws Exception{
-        listaDao.chamar();
+ //       listaDao.chamar();
     
     }
 
@@ -188,7 +187,6 @@ public class pacientesBean implements Serializable {
     }
 
     public ArrayList<pacientesBean> getPacientes() throws Exception {
-        pacientes = listaDao.loadList();
         return pacientes;
     }
 

@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
-import sistema.hospital.Dao.ListaDao;
 
 /**
  *
@@ -13,7 +12,6 @@ import sistema.hospital.Dao.ListaDao;
 @ManagedBean(name = "filaBean")
 @ViewScoped
 public class filaBean {
-    ListaDao lista = new ListaDao();
     private List<filaBean> fila = new ArrayList<>();
     private filaBean passiente = new filaBean();
     private String nome;
@@ -43,7 +41,7 @@ public class filaBean {
      * @return the passiente
      */
     public filaBean getPassiente() throws Exception {
-        passiente = lista.chamar();
+        //passiente = lista.chamar();
         return passiente;
     }
 

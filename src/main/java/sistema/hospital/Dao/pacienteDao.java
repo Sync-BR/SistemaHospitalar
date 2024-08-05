@@ -13,6 +13,8 @@ import sistema.hospital.util.conexaoUtil;
  */
 public class pacienteDao {
 
+    
+    
     /**
      *
      * @author SYNC
